@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: helloworldwebapp
+    namespace: helloworld
+    labels:
+        app: helloworldwebapp
+        tenant: helloworld
+        environment: test
+        project_name: richmix8
+spec:
+    replicas: 1
+    selector: # indicates which Pods (with which labeles) need be handled by this Deployment
+        matchLabels:
+            app: helloworldwebapp
+            tenant: helloworld
+            environment: test
+            project_name: richmix8
+    template:
+        metadata:  # indicates the metadata that will be added to each Pod
+            labels:
+                app: helloworldwebapp
+                tenant: helloworld
+                environment: test
+                project_name: richmix8
+        spec:
+            nodeSelector:
+                kubernetes.io/os: linux
+            containers:
+                - name: helloworldwebapp
+                  image: 329589958096.dkr.ecr.eu-west-1.amazonaws.com/helloworldwebapp:dev
+                  imagePullPolicy: Always 
+                  ports:
+                    - containerPort: 8080

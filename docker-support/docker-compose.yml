@@ -1,0 +1,13 @@
+#Stick to 2.x version in order to use mem_limit setting
+version: '2.4'
+
+services:
+  helloworldwebsite:
+    container_name: helloworldwebsite
+    image: ${DOCKER_REGISTRY-}helloworldwebsite
+    build:
+      context: ../Publish/Website
+      dockerfile: Dockerfile
+    ports:
+        - "44360:443"
+    mem_limit: 4GB

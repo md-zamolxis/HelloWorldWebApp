@@ -1,0 +1,20 @@
+# Default values for richmix-helm-chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+tenant: demo
+environment: dev
+
+nodeSelector:
+  kubernetes.io/os: linux
+
+website:
+  image:
+    repository: 329589958096.dkr.ecr.eu-west-1.amazonaws.com/helloworldwebapp
+    tag: v14
+
+#ingress:
+#  hosts: 
+#    website: demo-eks-richmix8website.salesperformanceplatform.com
+#    api: demo-eks-richmix8api.salesperformanceplatform.com
+#    hangfire: demo-eks-richmix8hangfire.salesperformanceplatform.com

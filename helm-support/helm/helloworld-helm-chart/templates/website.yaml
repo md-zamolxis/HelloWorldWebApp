@@ -1,0 +1,171 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: helloworldwebapp
+    namespace: {{ .Release.Namespace }}
+    labels:
+      app: helloworldwebapp
+      tenant: {{ .Values.tenant }}
+      environment: {{ .Values.environment }}
+      project_name: {{ .Release.Name  }}
+spec:
+  {{- if not .Values.website.autoscaling.enabled }}
+    replicas: {{ .Values.website.replicaCount }}
+  {{- end }}
+    selector: # indicates which Pods (with which labeles) need be handled by this Deployment
+        matchLabels:
+          app: helloworldwebapp
+          tenant: {{ .Values.tenant }}
+          environment: {{ .Values.environment }}
+          project_name: {{ .Release.Name }}
+    template:
+        metadata:  # indicates the metadata that will be added to each Pod
+            labels:
+              app: helloworldwebapp
+              tenant: {{ .Values.tenant }}
+              environment: {{ .Values.environment }}
+              project_name: {{ .Release.Name }}
+        spec:
+          {{- with .Values.windowsNodeSelector }}
+          nodeSelector:
+            {{- toYaml . | nindent 13 }}
+          {{- end }}
+          containers:
+            - name: helloworldwebapp
+              image: "{{ .Values.website.image.repository }}:{{ .Values.website.image.tag | default .Values.tag }}"
+              imagePullPolicy: {{ .Values.website.image.pullPolicy }} 
+              ports:
+                - containerPort: 80
+                  name: http
+              {{- if .Values.website.resources }}
+              resources:
+                {{- toYaml .Values.website.resources | nindent 17 }}
+              {{- end }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: helloworldwebapp
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: helloworldwebapp
+    tenant: {{ .Values.tenant }}
+    environment: {{ .Values.environment }}
+    project_name: {{ .Release.Name }}
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app: helloworldwebapp
+    tenant: {{ .Values.tenant }}
+    environment: {{ .Values.environment }}
+    project_name: {{ .Release.Name }}
+
+---
+
+{{- if .Values.website.autoscaling.enabled }}
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: helloworldwebapp
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: helloworldwebapp
+    tenant: {{ .Values.tenant }}
+    environment: {{ .Values.environment }}
+    project_name: {{ .Release.Name }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: helloworldwebapp
+  minReplicas: {{ .Values.website.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.website.autoscaling.maxReplicas }}
+  metrics:
+  {{- if .Values.website.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: {{ .Values.website.autoscaling.targetCPUUtilizationPercentage }}
+  {{- end }}
+  {{- if .Values.website.autoscaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageUtilization: {{ .Values.website.autoscaling.targetMemoryUtilizationPercentage }}
+  {{- end }}
+{{- end }}
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   

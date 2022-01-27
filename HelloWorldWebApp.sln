@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HelloWorldWebApp", "HelloWorldWebApp.csproj", "{A94769DA-D089-472F-B855-79627A316987}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-support\docker-compose.dcproj", "{296D694E-DF0A-4C76-A31B-AA994EF2E47D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		NoVariablesDefault|Any CPU = NoVariablesDefault|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A94769DA-D089-472F-B855-79627A316987}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A94769DA-D089-472F-B855-79627A316987}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A94769DA-D089-472F-B855-79627A316987}.NoVariablesDefault|Any CPU.ActiveCfg = Release|Any CPU
+		{A94769DA-D089-472F-B855-79627A316987}.NoVariablesDefault|Any CPU.Build.0 = Release|Any CPU
+		{A94769DA-D089-472F-B855-79627A316987}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A94769DA-D089-472F-B855-79627A316987}.Release|Any CPU.Build.0 = Release|Any CPU
+		{296D694E-DF0A-4C76-A31B-AA994EF2E47D}.Debug|Any CPU.ActiveCfg = NoVariablesDefault
+		{296D694E-DF0A-4C76-A31B-AA994EF2E47D}.Debug|Any CPU.Build.0 = NoVariablesDefault
+		{296D694E-DF0A-4C76-A31B-AA994EF2E47D}.NoVariablesDefault|Any CPU.ActiveCfg = NoVariablesDefault
+		{296D694E-DF0A-4C76-A31B-AA994EF2E47D}.NoVariablesDefault|Any CPU.Build.0 = NoVariablesDefault
+		{296D694E-DF0A-4C76-A31B-AA994EF2E47D}.Release|Any CPU.ActiveCfg = NoVariablesDefault
+		{296D694E-DF0A-4C76-A31B-AA994EF2E47D}.Release|Any CPU.Build.0 = NoVariablesDefault
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E327136E-1E64-44EC-98CB-A9673CC20A19}
+	EndGlobalSection
+EndGlobal
